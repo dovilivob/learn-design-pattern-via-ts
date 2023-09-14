@@ -5,73 +5,73 @@
 // Function --> Func
 // Collaborator --> Coll
 
-interface IFact {
-	create_Prod_A(): IProdA;
-	create_Prod_B(): IProdB;
+interface Fact {
+	create_prod_A(): ProdA;
+	create_prod_B(): ProdB;
 }
 
-interface IProdA {
+interface ProdA {
 	func(): string;
 }
-interface IProdB {
+interface ProdB {
 	func(): string;
-	another_func(coll: IProdA): string;
+	another_func(coll: ProdA): string;
 }
 
-class Fact1 implements IFact {
-	public create_Prod_A(): IProdA {
+class Fact1 implements Fact {
+	public create_prod_A(): ProdA {
 		return new ProdA1();
 	}
-	public create_Prod_B(): IProdB {
+	public create_prod_B(): ProdB {
 		return new ProdB1();
 	}
 }
 
-class Fact2 implements IFact {
-	public create_Prod_A(): IProdA {
+class Fact2 implements Fact {
+	public create_prod_A(): ProdA {
 		return new ProdA2();
 	}
 
-	public create_Prod_B(): IProdB {
+	public create_prod_B(): ProdB {
 		return new ProdB2();
 	}
 }
 
-class ProdA1 implements IProdA {
+class ProdA1 implements ProdA {
 	public func(): string {
 		return 'the result of A1';
 	}
 }
 
-class ProdA2 implements IProdA {
+class ProdA2 implements ProdA {
 	public func(): string {
 		return 'the result of A2';
 	}
 }
 
-class ProdB1 implements IProdB {
+class ProdB1 implements ProdB {
 	public func(): string {
 		return 'the result of B1';
 	}
-	public another_func(coll: IProdA): string {
+	public another_func(coll: ProdA): string {
 		const result = coll.func();
 		return `the result of B1 work with (${result})`;
 	}
 }
 
-class ProdB2 implements IProdB {
+class ProdB2 implements ProdB {
 	public func(): string {
 		return 'the result of B2';
 	}
-	public another_func(coll: IProdA): string {
+	public another_func(coll: ProdA): string {
 		const result = coll.func();
 		return `the result of B2 work with (${result})`;
 	}
 }
 
-function client_code(fact: IFact) {
-	const pA = fact.create_Prod_A();
-	const pB = fact.create_Prod_B();
+function client_code(fact: Fact) {
+	const pA = fact.create_prod_A();
+	const pB = fact.create_prod_B();
 
 	console.log(pB.func());
 	console.log(pB.another_func(pA));
