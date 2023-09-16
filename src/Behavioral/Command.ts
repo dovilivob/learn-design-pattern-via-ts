@@ -50,10 +50,10 @@ class Invoker {
 	private on_start: Cmd | undefined;
 	private on_finish: Cmd | undefined;
 
-	public set_on_start(cmd: cmd): void {
+	public set_on_start(cmd: Cmd): void {
 		this.on_start = cmd;
 	}
-	public set_on_finish(cmd: cmd): void {
+	public set_on_finish(cmd: Cmd): void {
 		this.on_finish = cmd;
 	}
 
