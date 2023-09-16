@@ -24,6 +24,7 @@ class Adapter extends Target {
 	}
 }
 
+// @ts-ignore
 function main(target: Target) {
 	console.log(target.req());
 }
