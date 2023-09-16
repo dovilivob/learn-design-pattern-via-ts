@@ -69,7 +69,7 @@ class ProdB2 implements ProdB {
 	}
 }
 
-function client_code(fact: Fact) {
+function main(fact: Fact) {
 	const pA = fact.create_prod_A();
 	const pB = fact.create_prod_B();
 
@@ -78,7 +78,7 @@ function client_code(fact: Fact) {
 }
 
 console.log();
-client_code(new Fact1());
+main(new Fact1());
 console.log();
-client_code(new Fact2());
+main(new Fact2());
 console.log();

@@ -41,13 +41,13 @@ class Prod2 implements Prod {
 	}
 }
 
-function client_code(creator: Creator) {
+function main(creator: Creator) {
 	console.log(creator.some_op());
 }
 
 console.log();
 
-client_code(new Creator1());
-client_code(new Creator2());
+main(new Creator1());
+main(new Creator2());
 
 console.log();

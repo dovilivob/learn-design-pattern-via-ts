@@ -4,7 +4,7 @@ interface Handler {
 }
 
 abstract class Handler implements Handler {
-	private next: Handler | undefined;
+	private next!: Handler;
 
 	public set_next(handler: Handler): Handler {
 		this.next = handler;
@@ -36,7 +36,8 @@ class Cat extends Handler {
 	}
 }
 
-function client_code(handler: Handler) {
+// @ts-ignore
+function main(handler: Handler) {
 	console.log();
 	const foods = ['🍌', '🥩', '🪳', '🍎', '🐁'];
 	for (const food of foods) {
@@ -55,8 +56,8 @@ const cat = new Cat();
 monke.set_next(snake).set_next(cat);
 
 console.log('🦍 --> 🐍 --> 🐈');
-client_code(monke);
+main(monke);
 console.log('🐍 --> 🐈');
-client_code(snake);
+main(snake);
 console.log('🐈');
-client_code(cat);
+main(cat);

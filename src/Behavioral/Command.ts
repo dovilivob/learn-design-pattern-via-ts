@@ -47,8 +47,8 @@ class Receiver {
 }
 
 class Invoker {
-	private on_start: Cmd | undefined;
-	private on_finish: Cmd | undefined;
+	private on_start!: Cmd;
+	private on_finish!: Cmd;
 
 	public set_on_start(cmd: Cmd): void {
 		this.on_start = cmd;
