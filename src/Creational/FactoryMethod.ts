@@ -41,6 +41,7 @@ class Prod2 implements Prod {
 	}
 }
 
+// @ts-ignore
 function main(creator: Creator) {
 	console.log(creator.some_op());
 }

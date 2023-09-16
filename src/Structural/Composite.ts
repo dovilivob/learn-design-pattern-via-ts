@@ -66,6 +66,7 @@ class Composite extends Component {
 	}
 }
 
+// @ts-ignore
 function main(component: Component): void {
 	console.log(`Result: ${component.print_out()}`);
 }

@@ -69,6 +69,7 @@ class ProdB2 implements ProdB {
 	}
 }
 
+// @ts-ignore
 function main(fact: Fact) {
 	const pA = fact.create_prod_A();
 	const pB = fact.create_prod_B();
