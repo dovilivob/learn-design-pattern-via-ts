@@ -10,20 +10,19 @@ interface Cmd {
 
 class SmplCmd implements Cmd {
 	private readonly payload: string;
-
 	constructor(payload: string) {
 		this.payload = payload;
 	}
 
 	public exe(): void {
-		console.log(`Simple Command: ${this.payload}`);
+		console.log(`SmplCmd: ${this.payload}`);
 	}
 }
 
 class CmplxCmd implements Cmd {
-	private receiver: Receiver;
 	private readonly a: string;
 	private readonly b: string;
+	private receiver: Receiver;
 
 	constructor(receiver: Receiver, a: string, b: string) {
 		this.receiver = receiver;
@@ -32,7 +31,7 @@ class CmplxCmd implements Cmd {
 	}
 
 	public exe(): void {
-		console.log(`Complex Command: Complex stuff should be done by a receiver obj...`);
+		console.log(`CmplxCmd: Calling receiver to do things...`);
 		this.receiver.do_sth(this.a);
 		this.receiver.do_sth_else(this.b);
 	}
@@ -40,11 +39,10 @@ class CmplxCmd implements Cmd {
 
 class Receiver {
 	public do_sth(value: string): void {
-		console.log(`Receiver: working on ${value}`);
+		console.log(`Receiver: Doing something --> (${value})`);
 	}
-
 	public do_sth_else(value: string): void {
-		console.log(`Receiver: also working on ${value}`);
+		console.log(`Receiver: Doing something else --> (${value})`);
 	}
 }
 
@@ -52,22 +50,27 @@ class Invoker {
 	private on_start: Cmd | undefined;
 	private on_finish: Cmd | undefined;
 
-	public set_on_start(cmd: Cmd): void {
+	public set_on_start(cmd: cmd): void {
 		this.on_start = cmd;
 	}
-	public set_on_finish(cmd: Cmd): void {
+	public set_on_finish(cmd: cmd): void {
 		this.on_finish = cmd;
 	}
 
-	public do_sth_important(): void {
-		console.log(`Invoker: before start...`);
-		if (this.is_cmd(this.on_start)) {
-			this.on_start.exe();
+	public do_sth_crazy(): void {
+		const validation = {
+			start: this.is_cmd(this.on_start),
+			finish: this.is_cmd(this.on_finish)
+		};
+
+		if (validation.start) {
+			console.log("Before starting, let's do something first...");
+			this.on_start?.exe();
 		}
-		console.log('Doing important things');
-		console.log(`Invoker: after finish...`);
-		if (this.is_cmd(this.on_finish)) {
-			this.on_finish.exe();
+		console.log('Invoker: Doing something SUPER WILD');
+		if (validation.finish) {
+			console.log("After finishing, there's something have to run before exit...");
+			this.on_finish?.exe();
 		}
 	}
 
@@ -76,10 +79,10 @@ class Invoker {
 	}
 }
 
-const invoker = new Invoker();
 const receiver = new Receiver();
+const invoker = new Invoker();
 
-invoker.set_on_start(new SmplCmd('Hey'));
-invoker.set_on_finish(new CmplxCmd(receiver, 'send email', 'save report'));
+invoker.set_on_start(new SmplCmd('Hello, good morning'));
+invoker.set_on_finish(new CmplxCmd(receiver, 'The payload has unlocked', 'This game ends now!'));
 
-invoker.do_sth_important();
+invoker.do_sth_crazy();
